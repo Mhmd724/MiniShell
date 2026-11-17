@@ -42,7 +42,7 @@ int	add_to_env_list(t_env **env, char *key, char *value)
 
 	if (!is_valid_identifier(key))
 	{
-		printf("export: %s: not a valid identifier\n", key);
+		print_cmd_error("export", key, "not a valid identifier");
 		return (1);
 	}
 	var_exists = get_env_var(*env, key);
@@ -55,7 +55,7 @@ int	add_non_equal_var(t_env **env, char *key, char *value)
 {
 	if (!is_valid_identifier(key))
 	{
-		printf("export: %s: not a valid identifier\n", key);
+		print_cmd_error("export", key, "not a valid identifier");
 		return (1);
 	}
 	if (!get_env_var(*env, key))

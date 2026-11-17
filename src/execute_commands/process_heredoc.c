@@ -6,7 +6,7 @@ int	process_redirects_heredoc(t_lexer *redirects, t_tools *tools)
 	char	*filename;
 
 	if (!redirects->next || redirects->next->token != TOKEN_WORD)
-		return (printf("minishell: syntax error near unexpected token\n"), -1);
+		return (print_syntax_error("newline", NULL), -1);
 	delimiter = redirects->next->str;
 	filename = handle_heredoc_filename(tools, &delimiter,
 			redirects->next->quote_type);

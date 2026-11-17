@@ -47,7 +47,7 @@ int	cd_oldpwd(t_env *env)
 	}
 	set_env_var(&env, "OLDPWD", pwd, 0);
 	set_env_var(&env, "PWD", oldpwd, 0);
-	printf("%s\n", oldpwd);
+	ft_putendl_fd(oldpwd, STDOUT_FILENO);
 	free(pwd);
 	free(oldpwd);
 	return (0);

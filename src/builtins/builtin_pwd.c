@@ -23,7 +23,7 @@ t_env	*fetch_pwd(t_env *env)
 
 	pwd = get_env_var(env, "PWD");
 	if (!pwd->value)
-		printf("Error: PWD not found in environment variables.\n");
+		print_cmd_error("pwd", NULL, "PWD not set");
 	return (pwd);
 }
 
@@ -47,7 +47,7 @@ int	print_pwd(t_env *env)
 		ft_strcat(pwd->value, "/..");
 		i++;
 	}
-	printf("%s\n", pwd->value);
+	ft_putendl_fd(pwd->value, STDOUT_FILENO);
 	return (0);
 }
 
@@ -59,14 +59,14 @@ int	builtin_pwd(t_tools *tools, t_parser *parser, t_env **env)
 	(void)parser;
 	if (getcwd(cwd, sizeof(cwd)))
 	{
-		printf("%s\n", cwd);
+		ft_putendl_fd(cwd, STDOUT_FILENO);
 		return (0);
 	}
 	else
 	{
 		if (!env)
 		{
-			printf("Error: Environment list is NULL.\n");
+			print_cmd_error("pwd", NULL, "environment list is empty");
 			return (1);
 		}
 		return (print_pwd(*env));

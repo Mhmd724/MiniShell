@@ -60,7 +60,7 @@ int	builtin_unset(t_tools *tools, t_parser *parser, t_env **env)
 		return (0);
 	if (check_option(temp->str))
 	{
-		printf("unset: invalid option '%s'\n", temp->str);
+		print_cmd_error("unset", temp->str, "invalid option");
 		return (2);
 	}
 	while (temp && temp->token == TOKEN_WORD)
@@ -68,7 +68,7 @@ int	builtin_unset(t_tools *tools, t_parser *parser, t_env **env)
 		if (!valid_identifier(temp->str))
 		{
 			exit_status = 1;
-			printf("`%s`: not a valid identifier\n", temp->str);
+			print_cmd_error("unset", temp->str, "not a valid identifier");
 		}
 		else
 			remove_env_var(env, temp->str);

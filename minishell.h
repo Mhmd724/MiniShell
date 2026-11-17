@@ -270,6 +270,7 @@ int				check_pipe_error(t_tools *tools);
 int				validate_pipes_and_words(t_parser *head);
 /*  print_the_error.c   */
 void			print_syntax_error(char *msg, int *status);
+void			print_cmd_error(char *cmd, char *arg, char *msg);
 void			free_tools(t_tools *tools);
 /*  quote_error.c   */
 int				check_unclosed_quotes(char *str);

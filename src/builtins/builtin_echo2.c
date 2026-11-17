@@ -3,11 +3,11 @@
 int	print_char(char c)
 {
 	if (c == '\\')
-		return (printf("\\"), 1);
+		return (ft_putchar_fd('\\', STDOUT_FILENO), 1);
 	if (c == 'n')
-		return (printf("\n"), 1);
+		return (ft_putchar_fd('\n', STDOUT_FILENO), 1);
 	if (c == 't')
-		return (printf("\t"), 1);
+		return (ft_putchar_fd('\t', STDOUT_FILENO), 1);
 	return (0);
 }
 
@@ -69,10 +69,10 @@ void	handle_esc_quoted(char *str)
 			if (print_char(str[i + 1]))
 				i += 2;
 			else
-				printf("%c", str[i++]);
+				ft_putchar_fd(str[i++], STDOUT_FILENO);
 		}
 		else
-			printf("%c", str[i++]);
+			ft_putchar_fd(str[i++], STDOUT_FILENO);
 	}
 }
 

@@ -49,14 +49,14 @@ void	print_no_escape(const char *str, int unquoted)
 		{
 			if (str[i] == '\\' && str[i + 1])
 			{
-				printf("%c", str[i + 1]);
+				ft_putchar_fd(str[i + 1], STDOUT_FILENO);
 				i += 2;
 			}
 			else
-				printf("%c", str[i++]);
+				ft_putchar_fd(str[i++], STDOUT_FILENO);
 		}
 		else
-			printf("%c", str[i++]);
+			ft_putchar_fd(str[i++], STDOUT_FILENO);
 	}
 }
 
@@ -66,16 +66,16 @@ void	printf_arguments(t_cmd_ctx *args, int escape, int *i)
 	{
 		print_with_escape(args[*i].str, args[*i].non_quoted);
 		if (args[*i + 1].str)
-			printf(" ");
+			ft_putchar_fd(' ', STDOUT_FILENO);
 		(*i)++;
 		return ;
 	}
 	if (!args[*i].single_quotes)
 		print_no_escape(args[*i].str, args[*i].non_quoted);
 	else
-		printf("%s", args[*i].str);
+		ft_putstr_fd(args[*i].str, STDOUT_FILENO);
 	if (args[*i + 1].str)
-		printf(" ");
+		ft_putchar_fd(' ', STDOUT_FILENO);
 	(*i)++;
 }
 
@@ -92,13 +92,13 @@ int	builtin_echo(t_tools *tools, t_parser *parser, t_env **env)
 	if (!args || !args[0].str)
 	{
 		free_args(args);
-		printf("\n");
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		return (0);
 	}
 	i = handle_echo_flags(args, &new_line, &escape);
 	while (args[i].str)
 		printf_arguments(args, escape, &i);
 	if (new_line)
-		printf("\n");
+		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (free_args(args), 0);
 }

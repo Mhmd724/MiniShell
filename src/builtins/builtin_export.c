@@ -9,10 +9,15 @@ void	print_export_list(t_env *env)
 	temp = env;
 	while (temp)
 	{
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(temp->key, STDOUT_FILENO);
 		if (temp->value)
-			printf("declare -x %s=\"%s\"\n", temp->key, temp->value);
-		else
-			printf("declare -x %s\n", temp->key);
+		{
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(temp->value, STDOUT_FILENO);
+			ft_putchar_fd('"', STDOUT_FILENO);
+		}
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		temp = temp->next;
 	}
 }
@@ -27,7 +32,7 @@ int	handle_key_value(t_env **env, const char *var)
 	eq = ft_strchr(var, '=');
 	if (eq == var)
 	{
-		printf("export: %s: not a valid identifier\n", var);
+		print_cmd_error("export", (char *)var, "not a valid identifier");
 		return (1);
 	}
 	if (!eq)

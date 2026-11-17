@@ -48,8 +48,7 @@ void	execute_external_command(t_tools *tools, t_parser *parser)
 	path = get_command_path(parser->tokens->str, tools->env);
 	if (!path)
 	{
-		printf("minishell: %s: command not found\n",
-			parser->tokens->str);
+		print_cmd_error(parser->tokens->str, NULL, "command not found");
 		exit(127);
 	}
 	args = build_args(parser->tokens);

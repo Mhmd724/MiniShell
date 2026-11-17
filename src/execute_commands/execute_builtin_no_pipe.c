@@ -51,7 +51,8 @@ int	setup_redirections_for_builtin(t_tools *tools, t_lexer *redirects)
 		fd = open_fd_for_redirections(tools, curr);
 		if (fd == -1)
 		{
-			perror("zsh: permission denied: testfile\n");
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			perror(curr->next->str);
 			return (-1);
 		}
 		if (redirect_fd_for_token(fd, curr->token) == -1)

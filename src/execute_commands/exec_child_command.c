@@ -8,7 +8,7 @@ int	open_file(t_lexer *curr, const char *file)
 		return (open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644));
 	if (curr->token == TOKEN_APPEND)
 		return (open(file, O_WRONLY | O_CREAT | O_APPEND, 0644));
-	printf("minishell: syntax error near unexpected token\n");
+	print_syntax_error("newline", NULL);
 	return (-1);
 }
 
@@ -19,19 +19,20 @@ int	get_redirection_fd(t_lexer *curr)
 
 	if (!curr->next || curr->next->token != TOKEN_WORD)
 	{
-		printf("minishell: syntax error near unexpected token\n");
+		print_syntax_error("newline", NULL);
 		return (-1);
 	}
 	filename = curr->next->str;
 	if (!filename)
 	{
-		printf("minishell: error processing redirection\n");
+		ft_putendl_fd("minishell: error processing redirection", 2);
 		return (-1);
 	}
 	fd = open_file(curr, filename);
 	if (fd == -1)
 	{
-		perror("minishell");
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		perror(filename);
 		return (-1);
 	}
 	return (fd);
@@ -64,7 +65,7 @@ int	setup_redirection_child(t_lexer *redirects)
 void	error_cmd_not_found(const char *cmd)
 {
 	write(2, "minishell: ", 11);
-	write(2, cmd, strlen(cmd));
+	write(2, cmd, ft_strlen(cmd));
 	write(2, ": command not found\n", 21);
 	exit(127);
 }

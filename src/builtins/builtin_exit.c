@@ -57,7 +57,7 @@ int	check_overflow(char *str)
 
 int	print_error(char *arg)
 {
-	printf("exit: %s: numeric argument required\n", arg);
+	print_cmd_error("exit", arg, "numeric argument required");
 	return (2);
 }
 
@@ -75,14 +75,12 @@ int	builtin_exit(t_tools *tools, t_parser *parser, t_env **env)
 	if (is_numeric(arg[1].str))
 	{
 		if (arg[2].str)
-			return (printf("exit: too many arguments\n"), free_args(arg), 1);
+			return (print_cmd_error("exit", NULL, "too many arguments"),
+				free_args(arg), 1);
 		if (!check_overflow(arg[1].str))
-		{
-			printf("exit: %s: numeric argument required\n", arg[1].str);
-			free_args(arg);
-			exit(2);
-		}
-		exit_status = ft_atoi(arg[1].str);
+			exit_status = print_error(arg[1].str);
+		else
+			exit_status = ft_atoi(arg[1].str);
 	}
 	else
 		exit_status = print_error(arg[1].str);
