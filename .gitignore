@@ -1,0 +1,10 @@
+# Build output
+objs/
+*.o
+*.a
+minishell
+
+# Not part of the project
+minishell.en.pdf
+to_remove_norminette.txt
+libft/stGDYeEX
