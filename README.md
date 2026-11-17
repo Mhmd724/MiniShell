@@ -97,4 +97,4 @@ Each input line goes through four stages:
 
 ## Author
 
-**Mohamad Harajli** ([@Mhmd724](https://github.com/Mhmd724)), 42 Beirut
+**Mohamad Harajly** ([@Mhmd724](https://github.com/Mhmd724)), 42 Beirut
